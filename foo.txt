@@ -1,0 +1,7 @@
+foo
+bar
+cat
+foo
+text
+Hello
+World
