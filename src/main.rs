@@ -12,7 +12,7 @@ fn main() {
     );
 
     // * Shift over the first week so that the 1st ends up on the correct day
-    for i in 0..first_day_of_the_week {
+    for _i in 0..first_day_of_the_week {
         days_string.push_str("   ");
     }
     // * Create a mutable reference (?) to the first day of the week
