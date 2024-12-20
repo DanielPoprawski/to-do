@@ -16,7 +16,7 @@ fn main() {
             "calendar" | "cal" | "c" => calendar(),
             "quit" | "q" => break,
             "help" | "h" => help(),
-            _ => unknwn_cmd(),
+            _ => unknwn_cmd(input.trim()),
         }
     }
 }
@@ -47,9 +47,9 @@ fn calendar() {
 
     // * Create the Header for the calendar
     println!(
-        "{}
-  Su Mo Tu We Th Fr Sa
-  ====================",
+        "\x1B[94m{}
+  \x1B[33mSu Mo Tu We Th Fr Sa
+  ====================\x1B[0m",
         month.to_string()
     );
 
@@ -61,14 +61,20 @@ fn calendar() {
     let mut index = first_day_of_the_week;
 
     for i in 0..days_in_month {
-        // * Append a 0 to the front of the date if it is less than 10 so that it is always represented as two digits
+        let mut appendix: String;
+
         if i < 9 {
-            let appendix = format!("0{} ", i + 1);
-            days_string.push_str(&appendix);
+            appendix = format!("0{} ", i + 1);
+            // * Append a 0 to the front of the date if it is less than 10 so that it is always represented as two digits
         } else {
-            let appendix = format!("{} ", i + 1);
-            days_string.push_str(&appendix);
+            appendix = format!("{} ", i + 1);
         }
+        if i as u32 == current_date.day0() {
+            appendix = format!("\x1B[92m{}\x1b[0m", appendix)
+            // * Wrap the date with green text if it is today's date
+        }
+        days_string.push_str(&appendix);
+
         // * Shift the week down if it is a Sunday
         if index >= 6 {
             days_string.push_str("\n  ");
@@ -89,7 +95,7 @@ fn help() {
     )
 }
 
-fn unknwn_cmd() {
-    println!("\x1B[31mError: Unknown command\x1B[0m");
+fn unknwn_cmd(cmd: &str) {
+    println!("\x1B[31mError: Unknown command '{}'\x1B[0m", cmd);
     help();
 }
