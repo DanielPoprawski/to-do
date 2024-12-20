@@ -47,7 +47,7 @@ fn calendar() {
 
     // * Create the Header for the calendar
     println!(
-        "\x1B[94m{}
+        "\x1B[34m\x1B[1m{}\x1B[0m
   \x1B[33mSu Mo Tu We Th Fr Sa
   ====================\x1B[0m",
         month.to_string()
@@ -70,8 +70,10 @@ fn calendar() {
             appendix = format!("{} ", i + 1);
         }
         if i as u32 == current_date.day0() {
-            appendix = format!("\x1B[92m{}\x1b[0m", appendix)
+            appendix = format!("\x1B[92m\x1B[1m{}\x1b[0m", appendix)
             // * Wrap the date with green text if it is today's date
+        } else if index % 2 == 0 {
+            appendix = format!("\x1B[30m{}\x1b[0m", appendix)
         }
         days_string.push_str(&appendix);
 
