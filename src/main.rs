@@ -1,8 +1,27 @@
-// use std::io;
+mod structs;
+
 use chrono::{DateTime, Datelike, Local, NaiveDate};
+use std::io;
 use time::{self, Month};
 
 fn main() {
+    println!("Enter a command (or 'quit' to exit):");
+    loop {
+        let mut input = String::new();
+        io::stdin()
+            .read_line(&mut input)
+            .expect("Failed to read line");
+
+        match input.trim() {
+            "calendar" | "cal" | "c" => calendar(),
+            "quit" | "q" => break,
+            "help" | "h" => help(),
+            _ => unknwn_cmd(),
+        }
+    }
+}
+
+fn calendar() {
     let current_date: DateTime<Local> = Local::now();
     // * Format: 2024-12-15 15:33:04.278536300 -05:00
     let current_month_number: u8 = current_date.month() as u8;
@@ -59,17 +78,18 @@ fn main() {
         }
     }
     println!("{}", days_string);
+}
 
-    //     loop {
-    //         println!("Enter a command (or 'quit' to exit):");
+fn help() {
+    println!(
+        "--- Help page (1/1) ---
+ - calendar (cal, c): Show this month's calendar
+ - help (h): Displays this message
+ - quit (q): Terminates the application"
+    )
+}
 
-    //         let mut input = String::new();
-    //         io::stdin()
-    //             .read_line(&mut input)
-    //             .expect("Failed to read line");
-
-    //         if input.trim() == "quit" || input.trim() == "q" {
-    //             break;
-    //         }
-    //     }
+fn unknwn_cmd() {
+    println!("\x1B[31mError: Unknown command\x1B[0m");
+    help();
 }
