@@ -48,8 +48,8 @@ fn calendar() {
     // * Create the Header for the calendar
     println!(
         "\x1B[34m\x1B[1m{}\x1B[0m
-  \x1B[33mSu Mo Tu We Th Fr Sa
-  ====================\x1B[0m",
+  \x1B[37mSu Mo Tu We Th Fr Sa\x1B[0m
+  \x1B[30m====================\x1B[0m",
         month.to_string()
     );
 
