@@ -13,15 +13,16 @@ fn main() {
             .expect("Failed to read line");
 
         match input.trim() {
-            "calendar" | "cal" | "c" => calendar(),
-            "quit" | "q" => break,
+            "calendar" | "cal" | "c" => calendar_monthly(),
+            "week" | "w" => calendar_weekly(),
             "help" | "h" => help(),
+            "quit" | "q" => break,
             _ => unknwn_cmd(input.trim()),
         }
     }
 }
 
-fn calendar() {
+fn calendar_monthly() {
     let current_date: DateTime<Local> = Local::now();
     // * Format: 2024-12-15 15:33:04.278536300 -05:00
     let current_month_number: u8 = current_date.month() as u8;
@@ -86,6 +87,23 @@ fn calendar() {
         }
     }
     println!("{}", days_string);
+}
+
+fn calendar_weekly() {
+    println!(
+        "	\x1B[34m\x1B[1mDec 15 - Dec 21\x1B[0m
+	SUN MON TUE WED THU FRI SAT 
+	\x1B[30m====================\x1B[0m
+09:00am
+10:00am
+11:00am
+12:00pm
+01:00pm
+02:00pm
+03:00pm
+04:00pm
+05:00pm"
+    );
 }
 
 fn help() {
