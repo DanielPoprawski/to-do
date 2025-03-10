@@ -90,6 +90,7 @@ fn calendar_monthly() {
 }
 
 fn calendar_weekly() {
+    // TODO: Fulfill this function
     println!(
         "	\x1B[34m\x1B[1mDec 15 - Dec 21\x1B[0m
 	SUN MON TUE WED THU FRI SAT 
